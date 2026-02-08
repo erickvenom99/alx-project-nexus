@@ -6,7 +6,33 @@ from .serializers import CategorySerializer, ProductSerializer
 from .filters import ProductFilter
 from .pagination import ProductPagination
 from .permissions import IsSellerOrReadOnly, IsOwnerOrReadOnly
+from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
 
+@extend_schema_view(
+    list=extend_schema(
+        summary="List all products",
+        description="Retrieve a paginated list of all available products. Supports filtering by category and sorting by price.",
+        parameters=[
+            OpenApiParameter(
+                name="category",
+                type=OpenApiTypes.INT,
+                location=OpenApiParameter.QUERY,
+                description="Filter by Category ID (e.g., ?category=1)"
+            ),
+            OpenApiParameter(
+                name="ordering",
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.QUERY,
+                description="Sort results. Use 'price' for ascending or '-price' for descending."
+            ),
+        ]
+    ),
+    retrieve=extend_schema(
+        summary="Get product details",
+        description="Returns full details for a single product ID."
+    ),
+)
 class ProductListView(generics.ListCreateAPIView):
     """View to list all active products"""
     queryset = Product.objects.filter(is_active=True)
