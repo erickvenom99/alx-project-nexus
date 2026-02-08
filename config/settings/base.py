@@ -19,6 +19,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-kxwm71mrp8=4%thd$w^r6
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
+ROOT_URLCONF = 'config.urls'
 
 # 3. APPLICATION DEFINITION
 INSTALLED_APPS = [
