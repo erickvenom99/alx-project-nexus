@@ -77,6 +77,31 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
+# settings.py
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Nexus E-Commerce API',
+    'DESCRIPTION': 'Detailed API documentation for Nexus E-Commerce. Use the "Authorize" button to enter your JWT token for protected routes.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # --- ADD THIS SECTION ---
+    'COMPONENT_SPLIT_PATCH': True,
+    'SECURITY': [
+        {
+            'BearerAuth': [],
+        }
+    ],
+    'APPEND_COMPONENTS': {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+            }
+        }
+    },
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

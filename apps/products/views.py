@@ -55,3 +55,7 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     lookup_field = 'slug'
     permission_classes = [IsSellerOrReadOnly, IsOwnerOrReadOnly]
+
+@extend_schema(responses=ProductSerializer, auth=[{'BearerAuth': []}])
+def create(self, request, *args, **kwargs):
+    return super().create(request, *args, **kwargs)
