@@ -24,6 +24,7 @@ urlpatterns = [
     # Connect all user-related endpoints under /api/users/
     path('api/users/', include('apps.users.urls')),
     path('api/products/', include('apps.products.urls')),
+    path('api/cart/', include('apps.cart.urls')),
 ]
 
 

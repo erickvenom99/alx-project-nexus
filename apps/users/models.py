@@ -13,10 +13,6 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
-        from django.apps import apps
-        UserProfile = apps.get_model('users', 'UserProfile')
-        UserProfile.objects.create(user=user)
-
         return user
     
     def create_superuser(self, email, password=None, **extra_fields):
